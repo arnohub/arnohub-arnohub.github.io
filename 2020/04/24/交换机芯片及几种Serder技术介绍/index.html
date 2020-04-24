@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Arno">
   <meta name="keywords" content="">
-  <title>HPCC（高精度拥塞控制） - Arnohub</title>
+  <title>交换机芯片及几种Serder技术介绍 - Arnohub</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -124,7 +124,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期六, 四月 18日 2020, 12:40 下午
+                  星期五, 四月 24日 2020, 3:55 下午
                 </p>
               
 
@@ -133,7 +133,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.2k 字
+                    824 字
                   </span>
                 
 
@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      4 分钟
+                      2 分钟
                   </span>
                 
 
@@ -169,13 +169,13 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>拥塞控制（Congestion Control,CC）是实现抄底延迟、高带宽、高速网络的网络稳定性的关键，在RDMA部署过程中发现现存的CC技术很难实现这个目标，因此提出HPCC方案来实现以上三个目标。HPCC利用INT来获取精确的链路负载信息并精确控制流量。通过增加因素，比如链路拥塞时的延迟信息，HPCC能够快速收敛，并利用剩余带宽以避免拥塞延迟，HPCC很容易部署在硬件上，并且已经部署在商用可编程的网卡和交换机上，相对于RDMA的拥塞控制方式（DCTCP），HPCC在incast场景下能够带来更低的延迟，并且减少拥塞发生的情况。</p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>在过去十年内，链路的带宽由1Gb增长到100Gb，并且这种增速还在继续。越来越多的应用需要超低延迟和高带宽，在今天及未来的高速网络中迫切需要的两个因素。<br>在数据中内，我们发现有两个重要的趋势来驱动对高性能网络的需求，第一个是资源的分布式部署和分布式计算，分布式部署中，CPU需要高速与GPU、DISK等进行数据通信。分布式计算中不同的计算节点需要网络提供更大带宽、更低的延迟通信。第二个趋势是CPU、DISK等性能的提升需要网络提供一个更高速率的通道。<br>阿里通过部署RoCEv2网络中发现RDMA网络中数据线速传输，积极占用网络上线资源很容易引起严重的拥塞，占用很多队列缓存， 导致延迟敏感的业务流性能受损。这里有两个流控技术在部署过程中遇到的问题。</p>
-<h3 id="PFC-Storems"><a href="#PFC-Storems" class="headerlink" title="PFC Storems"></a>PFC Storems</h3><p>比如在incast场景下，可能会导致设备无休止的发送PFC，或者由于bug引起的，我们尽最大可能阻止任何PFC帧的发送，我们换了CC的算法以减小发送的频率，虽然有效但链路利用率还是比较低。</p>
-<h3 id="出奇长的延迟"><a href="#出奇长的延迟" class="headerlink" title="出奇长的延迟"></a>出奇长的延迟</h3><p>在机器学习应用中有些messages延迟大于100μs时就会产生影响，而RDMA延迟期望延迟小于50μs的，最后定位出原因，在同个集群内有一个云计算存储系统占用了大部分队列，因此不得不把机器学习部署在一个新的集群内。<br>通过以上两中情况发现一个好的CC才能提供一个低延迟、高吞吐、可靠的网络。一个好的CC才能比卖你数据包被过多缓存或者丢弃，同样在RDMA最新的CC 比如DCQCN和TIMELY，有一些重要的限制。收敛慢、无法避免数据包被队列、复杂的调整参数。</p>
-<h2 id="阿里RDMA部署方案"><a href="#阿里RDMA部署方案" class="headerlink" title="阿里RDMA部署方案"></a>阿里RDMA部署方案</h2><p>阿里在RDMA环境下部署有存储、DB、深度学习训练框架业务，三级CLOS网络环境，一个POD几十台ToR，和汇聚层full-mesh互联，不同PoD通过Spine层进行数据交互，每台Server上联两台不同的ToR（去堆叠?），每个PoD是一个RDMA区域，意味着只有在同一个PoD内的Server之间可通过RDMA通信，使用RoCEv2，CC使用集成在RDMA网卡内的DCQCN，同时使用PFC，此时如果接收者发现数据包有丢失，发送者需要从丢包的地方开始重发。对比传统的TCP/IP网络，RDMA对性能的提升明显。</p>
-<h2 id="下一代CC展望"><a href="#下一代CC展望" class="headerlink" title="下一代CC展望"></a>下一代CC展望</h2><p>1、快速收敛；<br>2、队列长度几乎为0；<br>3、更少的决定因素；不应该让op去调试，更应该自适应网络环境和他自己的流量模型。<br>4、公平调度；<br>5、部署简单。<br>INT（in-network telemetry）数据发送者可以从ack报文中知晓一条流经过的所有链路的负载，这就是的发送者发送数据时很容易做速率调整。另一点是网卡变得更加兼容和可编程，网卡有能力处理更多数据层面的计算。</p>
-<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>HPCC依赖交换机提供更细颗粒度的负载信息，比如：队列大小、流对的收发流量。当链路出现拥塞时，feedback信号可能会被延迟发送，为了避免这个问题，HPCC直接控制发送字节数，而不像DCQCN那样只能控制发送频率，HPCC依靠每个ack来感知链路负载信息，然后调整发送者发送速率。同样HPCC水线的控制同样重要，这里的做法是结合RTT-based和ACK-based。</p>
+              <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>全球即将步入5G时代，底层网络必须要满足高吞吐、低延迟、高可用、智能化运维等条件，交换机在IDC内扮演者重要的角色，交换机交换芯片决定了交换机的性能，而高性能交换的功能是由交换芯片完成的。<br>目前broadcom、华为、思科都有自己的400G交换芯片。</p>
+<h2 id="Broadcom芯片简介"><a href="#Broadcom芯片简介" class="headerlink" title="Broadcom芯片简介"></a>Broadcom芯片简介</h2><p>broadcom芯片大致可分为三条产线：<br>1、Tomehawk，超大规模云计算网络/存储网络/高性能网络；<br>2、Trident，企业数据中心/园区/无线等；<br>3、Jericho，框式交换机。<br>最新的Th4芯片支持50G PAM4调制解调（serder）技术，单芯片提供25.6Tb交换能力。</p>
+<h2 id="PAM4技术"><a href="#PAM4技术" class="headerlink" title="PAM4技术"></a>PAM4技术</h2><p>PAM4是PAM（Pulse Amplitude Modulation，脉冲幅度调制）调制技术的一种，PAM信号是继NRZ（Non-Return-Zero，非归零码）后的热门信号传输技术，也是多阶调制技术的代表，广泛应用在高速信号传输领域。<br>PAM4和NRZ信号波形对比图<br><img src="https://img-blog.csdnimg.cn/2020042415173746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>对比我们发现，NRZ信号采用高、低两种信号电平表示数字逻辑信号0和1，每个时钟周期可以传输1bit的逻辑信息，PAM4采用4个不同的信号电平进行信号传输，每个周期可传输2bit的逻辑信息，在同样的波特率条件下，PAM4信号比特速率是NRZ的2倍。<br><strong>具体可理解为，NRZ(0,1)，PAM4(0,0；0,1；1,0；1,1)，一个PAM4相当NRZ两个时间位表达的信息量。</strong></p>
+<h2 id="为什么需要PAM4技术"><a href="#为什么需要PAM4技术" class="headerlink" title="为什么需要PAM4技术"></a>为什么需要PAM4技术</h2><p>1、成本诉求，5G时代，流量增长非常迅猛，但是运营商收入增长并没有和流量增长相匹配，两者剪刀差越来越大，如何缩小流量和收入的不平衡是ISP面临的一大痛点，因此降低剪刀差的措施就是降低成本。<br>2、性能诉求，5G对高流量的诉求。<br>如何提升转发速率，这里有两个方面的因素：1、利用高阶的调制解调算法加速数据传输速率；2、利用电领域技术加速，比如使用III-V族元素化合物进行光芯片涉及，取代之前纯硅元素。</p>
+<h2 id="PAM4-VS-NRZ"><a href="#PAM4-VS-NRZ" class="headerlink" title="PAM4 VS NRZ"></a>PAM4 VS NRZ</h2><p><img src="https://img-blog.csdnimg.cn/20200424153641432.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>我们发现PAM4眼图（上）明显抖动增加，这导致激光调制变得困难，接受的探测器对四种状态之间的三个阈值做判断变得更困难，需要考虑激光器的惯有温度导致量子效应变化，必须要支持高灵敏度和高线性度，比如对噪声抑制进行更加精细化的处理。</p>
+<h2 id="PSK"><a href="#PSK" class="headerlink" title="PSK"></a>PSK</h2><p>PSK（相位键控），是一种用载波相位表示输入信号信息的调制技术，相位键控分为绝对相位和相对相位两种，以二进制调制相位为例，取码元为1时，调制后载波与为调制载波相同；0表示调制后的载波与未调制载波反相。</p>
+<h2 id="QAM"><a href="#QAM" class="headerlink" title="QAM"></a>QAM</h2><p>QAM（正交振幅调制），在调制过程中，同时以载波信号的振幅和相位来代替不同的数字比特编码，进一步提高了频带利用率。可实现两路并行的数字信息的传输。</p>
 
             </div>
             <hr>
@@ -192,18 +192,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/24/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%8A%AF%E7%89%87%E5%8F%8A%E5%87%A0%E7%A7%8DSerder%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">交换机芯片及几种Serder技术介绍</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/04/05/%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">
-                        <span class="hidden-mobile">全球网络架构概述</span>
+                      <a href="/2020/04/18/HPCC%EF%BC%88%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%EF%BC%89/">
+                        <span class="hidden-mobile">HPCC（高精度拥塞控制）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -382,7 +376,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "HPCC（高精度拥塞控制）&nbsp;",
+        "交换机芯片及几种Serder技术介绍&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
