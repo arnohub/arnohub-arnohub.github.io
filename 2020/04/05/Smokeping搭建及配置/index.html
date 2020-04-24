@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Arno">
+  <meta name="keywords" content="">
+  <title>Smokeping搭建及配置 - Arnohub</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Arnohub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期日, 四月 5日 2020, 8:10 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    859 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      4 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h1 id="Smokeping介绍"><a href="#Smokeping介绍" class="headerlink" title="Smokeping介绍"></a>Smokeping介绍</h1><p>Smokeping采用rrdtool做支持，生成的网络延迟数据转化图表非常漂亮，支持交互式图形浏览，你可以查看任意时间段的监控数据。 Smokeping也可以部署主/从分布式测量，即用一台服务器作为“主”，其它的服务器作为“从”并向“主”服务器传输数据，最后汇总形成系统监控数据图表。</p>
+<p>官网：<a href="https://oss.oetiker.ch/smokeping/" target="_blank" rel="noopener">https://oss.oetiker.ch/smokeping/</a><br>GitHub：<a href="https://github.com/oetiker/SmokePing" target="_blank" rel="noopener">https://github.com/oetiker/SmokePing</a></p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h3 id="安装epel-yum源"><a href="#安装epel-yum源" class="headerlink" title="安装epel yum源"></a>安装epel yum源</h3><pre><code class="bash">#
+rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm  
+#
+修改/etc/yum.repos.d/epel.repo
+#</code></pre>
+<h3 id="安装rrdtool与依赖库"><a href="#安装rrdtool与依赖库" class="headerlink" title="安装rrdtool与依赖库"></a>安装rrdtool与依赖库</h3><pre><code class="bash">yum -y install perl perl-Net-Telnet perl-Net-DNS perl-LDAP perl-lib www-perl perl-RadiusPerl perl-IO-Socket-SSL perl-Socket6 perl-CGI-SpeedyCGI perl-FCGI perl-CGI-SpeedCGI perl-Time-HiRes perl-ExtUtils-MakeMaker perl-RRD-Simple rrdtool rrdtool-perl curl fping echoping  httpd httpd-devel gcc make  wget libxml2-devel libpng-devel glib pango pango-devel freetype freetype-devel fontconfig cairo cairo-devel libart_lgpl libart_lgpl-devel mod_fastcgi screen</code></pre>
+<h1 id="安装Smokeping"><a href="#安装Smokeping" class="headerlink" title="安装Smokeping"></a>安装Smokeping</h1><pre><code class="bash">#
+wget http://oss.oetiker.ch/smokeping/pub/smokeping-2.6.11.tar.gz
+#
+tar -zxvf smokeping-2.6.11.tar.gz
+#
+cdsmokeping-2.6.11
+#
+./setup/build-perl-modules.sh /usr/local/smokeping/thirdparty
+#
+./configure--prefix=/usr/local/smokeping 
+#
+/usr/bin/gmake install
+#</code></pre>
+<h1 id="配置Smokeping"><a href="#配置Smokeping" class="headerlink" title="配置Smokeping"></a>配置Smokeping</h1><h3 id="创建cache、data、var目录"><a href="#创建cache、data、var目录" class="headerlink" title="创建cache、data、var目录"></a>创建cache、data、var目录</h3><pre><code class="bash">mkdir -p /usr/local/smokeping/cache /usr/local/smokeping/data /usr/local/smokeping/var</code></pre>
+<h3 id="创建日志文件"><a href="#创建日志文件" class="headerlink" title="创建日志文件"></a>创建日志文件</h3><pre><code class="bash">touch /var/log/smokeping.log</code></pre>
+<h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><pre><code class="bash">chown apache:apache /usr/local/smokeping/cache /usr/local/smokeping/data /usr/local/smokeping/var
+chown apache:apache /var/log/smokeping.log</code></pre>
+<h3 id="修改Smokeping配置文件"><a href="#修改Smokeping配置文件" class="headerlink" title="修改Smokeping配置文件"></a>修改Smokeping配置文件</h3><pre><code class="bash">cd /usr/local/smokeping/htdocs/
+mv smokeping.fcgi.dist smokeping.fcgi
+cd /usr/local/smokeping/etc
+mv config.dist config
+vim config
+    cgiurl=http://127.0.0.1/smokeping.cgi </code></pre>
+<h3 id="修改apache配置文件"><a href="#修改apache配置文件" class="headerlink" title="修改apache配置文件"></a>修改apache配置文件</h3><pre><code class="bash">vim /etc/httpd/conf/httpd.conf
+# 在DocumentRoot &quot;/var/www/html&quot;添加如下配置
+Alias /cache &quot;/usr/local/smokeping/cache/&quot; 
+Alias /cropper &quot;/usr/local/smokeping/htdocs/cropper/&quot; 
+Alias /smokeping &quot;/usr/local/smokeping/htdocs/smokeping.fcgi&quot;
+&lt;Directory &quot;/usr/local/smokeping&quot;&gt;
+AllowOverride None
+Options All 
+AddHandler cgi-script .fcgi .cgi
+Order allow,deny
+Allow from all
+AuthName &quot;Smokeping&quot;
+AuthType Basic 
+AuthUserFile /usr/local/smokeping/htdocs/htpasswd
+Require valid-user 
+DirectoryIndex smokeping.fcgi
+&lt;/Directory&gt;</code></pre>
+<h3 id="开机启动与安全策略"><a href="#开机启动与安全策略" class="headerlink" title="开机启动与安全策略"></a>开机启动与安全策略</h3><pre><code class="bash">echo &quot;/usr/local/smokeping/bin/smokeping--logfile=/var/log/smokeping.log 2&gt;&amp;1 &amp;&quot; &gt;&gt; /etc/rc.local
+chkconfig httpd on
+iptables -t filter -I INPUT -p tcp --dport 80 -j ACCEPT
+setenforce 0
+#
+service httpd restart
+/usr/local/smokeping/bin/smokeping  --logfile=/var/log/smokeping.log</code></pre>
+<h3 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h3><pre><code class="bash">htpasswd -c /usr/local/smokeping/htdocs/htpasswd root</code></pre>
+<h1 id="启动Smokeping"><a href="#启动Smokeping" class="headerlink" title="启动Smokeping"></a>启动Smokeping</h1><pre><code class="bash">/usr/local/smokeping/bin/smokeping  --logfile=/var/log/smokeping.log
+# 或者在/etc/init.d/目录创建smokeping启动脚本
+#
+#!/bin/bash
+#
+# chkconfig: 2345 80 05
+# Description: Smokeping init.d script
+# Get function from functions library
+. /etc/init.d/functions
+# Start the service Smokeping
+function start() {
+echo -n &quot;Starting Smokeping: &quot;
+      /usr/local/smokeping/bin/smokeping  --logfile=/var/log/smokeping.log &gt;/dev/null 2&gt;&amp;1
+### Create the lock file ###
+      touch /var/lock/subsys/smokeping
+success $&quot;Smokeping startup&quot;
+echo
+}
+# Restart the service Smokeping
+function stop() {
+echo -n &quot;Stopping Smokeping: &quot;
+kill -9 `ps ax |grep &quot;/usr/local/smokeping/bin/smokeping&quot; |grep -v grep | awk &#39;{ print $1 }&#39;` &gt;/dev/null 2&gt;&amp;1
+### Now, delete the lock file ###
+rm -f /var/lock/subsys/smokeping
+success $&quot;Smokeping shutdown&quot;
+echo
+}
+#Show status about Smokeping
+function status() {
+NUM=&quot;`ps -ef|grep smokeping|grep -v grep|wc -l`&quot;
+if [ &quot;$NUM&quot; == &quot;0&quot; ];then
+echo &quot;Smokeping is not run&quot;
+else
+echo &quot;Smokeping is running&quot;
+fi
+}
+### main logic ###
+case &quot;$1&quot; in
+    start)
+        start
+        ;;
+stop)
+        stop
+        ;;
+status)
+        status
+        ;;
+restart|reload)
+        stop
+        start
+;;
+*)
+   echo $&quot;Usage: $0  {start|stop|restart|reload|status}&quot;
+   exit 1
+esac
+   exit 0
+#
+chmod 755 /etc/init.d/smokeping   
+chkconfig --add smokeping       
+chkconfig smokeping on
+chkconfig httpd on   
+/etc/init.d/httpd restart    
+/etc/init.d/smokeping restart  
+#</code></pre>
+<h1 id="增加监控点"><a href="#增加监控点" class="headerlink" title="增加监控点"></a>增加监控点</h1><pre><code class="bash">/usr/local/smokeping/etc/config
+#
++ Google-Cloud
+menu = GCP-SSR
+title = GCP-SSR-Monitor
+
+++ HongKong
+menu = HK-SSR
+title = HK-SSR
+alerts = someloss
+host = *.*.*.*
+
+step     = 60
+pings    = 60
+
+#如果遇到rd parameter mismatch报错，清理以下目录缓存即可
+rm -rf /opt/smokeping/cache/*
+rm -rf /opt/smokeping/data/*
+#</code></pre>
+<h1 id="展示效果"><a href="#展示效果" class="headerlink" title="展示效果"></a>展示效果</h1><p><img src="https://img-blog.csdnimg.cn/20200224012156170.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="说明及扩展"><a href="#说明及扩展" class="headerlink" title="说明及扩展"></a>说明及扩展</h3><p>待补充</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/05/Noction%20White-Paper/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">Noction White-Paper</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
+                        <span class="hidden-mobile">RFC7348（VxLAN）介绍</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Smokeping搭建及配置&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Arno">
+  <meta name="keywords" content="">
+  <title>MRT介绍 - Arnohub</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Arnohub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期日, 四月 5日 2020, 8:10 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.2k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      4 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h2 id="MRT有什么用"><a href="#MRT有什么用" class="headerlink" title="MRT有什么用"></a>MRT有什么用</h2><p>Multi-Threaded Routing Toolkit（多线程业务路由工具包），我们知道BGP路由包含沿途的AS号，目的前缀和下一跳，但是无法得到相邻AS的的出口IP和中间AS出入口路由器的IP地址。<br>BGP路由器在RIB中维护可达性信息，存放在以下三个集合中：<br>1、<strong><em>Adj-RIBs-In</em></strong>：从邻居AS入站更新消息中学习得到的路由信息；<br>2、<strong><em>Loc-RIB</em></strong>：通过应用本地策略从Adj-RIB-In选择符合条件的路由，然后将路由信息存放到本地路由表当中；<br>3、<strong><em>Adj-RIBs-Out</em></strong>：长Loc-RIB中选择，将向其邻居通告的路由，每个邻居由于策略不同，因此会根据每个对等体创建特定的Adj-RIB-Out。</p>
+<p>有些时候，需要收集路由器上生成的BGP路由信息，用于监视、故障排查和研究。<br>1、BGP looking glass给用户只读权限来访问一个路由器的命令窗口，look glass是一个交互式探索，而不是一个连续的数据采集，可以通过与被监控的路由器建立BGP方式来实现。<br>2、也可以通过专门为监控目的设计的协议来监控，比如BMP，允许监控机周期性的访问路由器的Adj-RIBs-In和BGP会话。<br>3、路由收集器则是直接和路由器建立BGP，每个路由器在每次Adj-RIB-Out更改时发送给收集器更新消息，每次收到更新BGP收集器就会dump a snapshot（RIB dump，RIB-out表的快照），并且会对比与上次的差别，然后将更新的消息和状态改变存到Updates dump（更新快照）。RIB dump提供了对BGP路由表变化的有效总结，具有粗略的时间粒度，但是足够用于研究，而Updates dump携带大量的要处理的信息，但是包含了路由的完整信息，用于路由变化的分析。比如常用到的Route Views，目前运行了18个收集器，这些收集器遍布到全球和几百个VPs建立BGP，Route Views没2小时保存一个RIB dump，每15min保存一个Updates dump，并导出MRT格式。</p>
+<h2 id="MRT报文"><a href="#MRT报文" class="headerlink" title="MRT报文"></a>MRT报文</h2><h3 id="标准MRT报头格式"><a href="#标准MRT报头格式" class="headerlink" title="标准MRT报头格式"></a>标准MRT报头格式</h3><p><img src="https://img-blog.csdnimg.cn/20200328235552456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="Type-amp-subType-amp-ET"><a href="#Type-amp-subType-amp-ET" class="headerlink" title="Type &amp; subType &amp; ET"></a>Type &amp; subType &amp; ET</h3><p>这里主要介绍BGP的MRT格式，type16：BGP4MP，type17：BGP4MP_ET，_ET后缀代表扩展时间戳的MRT报文头。老的时间戳只有4个8bit的数据表示，这个通常被称作UNIX time，表示距离Jan. 1, 1970年之后多长时间，理论上最大值代表的时间为：03:14:07 on January 19, 2038，扩展的时间戳数据存储长度增加到32bits，并且可以精确到毫秒。Length表示message字段的长度，不包括MRT Common头部。这里的message字段长度是可变的，这里存储的内容会根据type&amp;subtype字段的内容改变。</p>
+<h3 id="扩展时间戳MRT-格式报头"><a href="#扩展时间戳MRT-格式报头" class="headerlink" title="扩展时间戳MRT 格式报头"></a>扩展时间戳MRT 格式报头</h3><p><img src="https://img-blog.csdnimg.cn/20200328235654845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>注意：Microsecond Timestamp也计入到Length内。</p>
+<h3 id="TABLE-DUMP-type"><a href="#TABLE-DUMP-type" class="headerlink" title="TABLE_DUMP type"></a>TABLE_DUMP type</h3><p><img src="https://img-blog.csdnimg.cn/20200328235728523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>DUMP表，这个用来记录BGP路由信息库（RIB），建议以TABLE_DUMP_V2格式存储，大部分数据都是以TABLE_DUMP格式存储，考虑到兼容问<br>题，还是以TABLE_DUMP格式存储。<br><strong>Vies Number</strong>通常代表0，用于区分多个RIB视图；<br><strong>Prefix</strong>，包含RIB条目的IP地址，包含IPv4和IPv6两种不同的长度；<br><strong>Status</strong>，固定设置为1，在Table_Dump中并没有使用；<br><strong>Originated time</strong>，侦听到该条前缀的时间，这个值和MRT报头中的时间戳存储存储格式相同；<br><strong>Peer IP address</strong>，提供该条RIB条目的邻居地址，同样包含IPv4和IPv6两种格式，Peer AS存储邻居as号；<br><strong>Attribute Length</strong>，该条前缀属性的长度；<br><strong>BGP Attribute</strong>，BGP属性，其中AS_Path只支持2字节as号，TABLE_DUMP_v2支持4字节as号。</p>
+<h3 id="TABLE-DUMP-V2-type"><a href="#TABLE-DUMP-V2-type" class="headerlink" title="TABLE_DUMP_V2 type"></a>TABLE_DUMP_V2 type</h3><p>Table dump_v2版本相对于table dump类型来说包含对4字节as号和MP-BGP的支持，通过利用一个邻居索引列表（Peer_Index_Table）提升了对Table_dump存储的空间利用率，并且允许一条MRT记录去记录一条NLRI条目。</p>
+<h3 id="PEER-INDEX-TABLE-Subtype"><a href="#PEER-INDEX-TABLE-Subtype" class="headerlink" title="PEER_INDEX_TABLE Subtype"></a>PEER_INDEX_TABLE Subtype</h3><p><img src="https://img-blog.csdnimg.cn/20200328235832191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="PEER-ENTRIES"><a href="#PEER-ENTRIES" class="headerlink" title="PEER ENTRIES"></a>PEER ENTRIES</h3><p><img src="https://img-blog.csdnimg.cn/20200328235846341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="Type-16：BGP4MP-Type"><a href="#Type-16：BGP4MP-Type" class="headerlink" title="Type 16：BGP4MP Type"></a>Type 16：BGP4MP Type</h3><p>BGP4MP类型包含以下7种子类型：<br><img src="https://img-blog.csdnimg.cn/20200328235921877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h4 id="1、subType0：BGP4MP-STATE-CHANGE"><a href="#1、subType0：BGP4MP-STATE-CHANGE" class="headerlink" title="1、subType0：BGP4MP_STATE_CHANGE"></a>1、subType0：BGP4MP_STATE_CHANGE</h4><p><img src="https://img-blog.csdnimg.cn/20200328235944801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>用来表示BGP初始状态机，用来表示当前状态和前一个状态的变迁，当邻居AS每设置的时候，该字段被设置为0，这个字段存储了当前状态和前一个状态，具体code和状态对应关系如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200329000011544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h4 id="2、subType1：BGP4MP-MESSAGE"><a href="#2、subType1：BGP4MP-MESSAGE" class="headerlink" title="2、subType1：BGP4MP_MESSAGE"></a>2、subType1：BGP4MP_MESSAGE</h4><p><img src="https://img-blog.csdnimg.cn/20200329000029990.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>用来记录BGP message，原始的BGP message被封装在BGP message字段内，包含16个8位字段，同样这里只支持2字节的as号。</p>
+<h4 id="3、subType2：BGP4MP-MESSAGE-AS4"><a href="#3、subType2：BGP4MP-MESSAGE-AS4" class="headerlink" title="3、subType2：BGP4MP_MESSAGE_AS4"></a>3、subType2：BGP4MP_MESSAGE_AS4</h4><p><img src="https://img-blog.csdnimg.cn/20200329000054934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>用来支持4字节的as号。</p>
+<h4 id="4、subType3：BGP4MP-STATE-CHANGE-AS4"><a href="#4、subType3：BGP4MP-STATE-CHANGE-AS4" class="headerlink" title="4、subType3：BGP4MP_STATE_CHANGE_AS4"></a>4、subType3：BGP4MP_STATE_CHANGE_AS4</h4><p><img src="https://img-blog.csdnimg.cn/20200329000128202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>用来支持4字节的as号。</p>
+<h4 id="5、BGP4MP-MESSAGE-LOCAL"><a href="#5、BGP4MP-MESSAGE-LOCAL" class="headerlink" title="5、BGP4MP_MESSAGE_LOCAL"></a>5、BGP4MP_MESSAGE_LOCAL</h4><p>前面BGP4MP_MESSAGE这个用来存储远端产生的MESSAGE消息（被动接收远端MESSAGE），如果是本端route collector主动产生的MESSAGE消息如何存储，此时就用到BGP4MP_MESSAGE_LOCAL消息格式。</p>
+<h4 id="6、BGP4MP-MESSAGE-AS4-LOCAL"><a href="#6、BGP4MP-MESSAGE-AS4-LOCAL" class="headerlink" title="6、BGP4MP_MESSAGE_AS4_LOCAL"></a>6、BGP4MP_MESSAGE_AS4_LOCAL</h4><p>用来支持4字节的as号。</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/05/BIRD/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">BIRD</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MRT介绍&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

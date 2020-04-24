@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Arno">
+  <meta name="keywords" content="">
+  <title>Arnohub</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Arnohub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/18/HPCC%EF%BC%88%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%EF%BC%89/">
+        <p class="h4 index-header">HPCC（高精度拥塞控制）</p>
+      </a>
+
+      <a href="/2020/04/18/HPCC%EF%BC%88%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%EF%BC%89/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">摘要拥塞控制（Congestion Control,CC）是实现抄底延迟、高带宽、高速网络的网络稳定性的关键，在RDMA部署过程中发现现存的CC技术很难实现这个目标，因此提出HPCC方案来实现以上三个目标。HPCC利用INT来获取精确的链路负载信息并精确控制流量。通过增加因素，比如链路拥塞时的延迟信息，HPCC能够快速收敛，并利用剩余带宽以避免拥塞延迟，HPCC很容易部署在硬件上，并且已经部署在商用可编程的网卡和交换机上，相对于RDMA的拥塞控制方式（DCTCP），HPCC在incast场景下能够带来更低的延迟，并且减少拥塞发生的情况。
+简介在过去十年内，链路的带宽由1Gb增长到100Gb，并</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-18&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">
+        <p class="h4 index-header">全球网络架构概述</p>
+      </a>
+
+      <a href="/2020/04/05/%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">全球海底光缆图
+全球互联网多级结构全球互联网是多级结构，下级运营商需要购买上级运营商的转接带宽实现互联；平级运营商之间的对等互联，最底层运营商主要通过购买传送带宽实现全球通达，而顶级运营商只出口转接带宽或做少量的对等互联，而不需要购买转接带宽。
+全球Tier1运营商能够通过对等关系获取全球路由表；网络可以通达多个洲；与多个洲内的其他运营商实现互联；在多个洲拥有或者租用洲际光缆。对等（peer）：访问对方的ISP和它的转接客户；对等互联通常采取互不结算的方式，同时也存在小网向大网付费情况。
+转接（transit）：通过转接ISP访问全互联网；被转接方向转接方支付费用。互联又分为专用对等互联：在两</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%85%B3/">
+        <p class="h4 index-header">流量控制相关</p>
+      </a>
+
+      <a href="/2020/04/05/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%85%B3/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">令牌桶简介TP（Traffic Policing）流量监管，监督不同流量进入网络的速率，对超出的部分流量进行惩罚；TS（Traffic Shaping）流量整形，主动调整流量输入的速率，达到削峰填谷；LR（Line Rate）接口限速，对一个接口上发送或接收的全部报文的总速率进行限制。上述措施实施的条件是必须要知道流量是否超出规格，一般采用令牌桶对流量的规格进行评估。令牌桶可以看做一个存放一定数量令牌的容器，系统按照设定的速度向桶中放置令牌，当桶中令牌满时，多出的令牌溢出，桶中令牌不再增加，使用令牌桶对流量规格进行评估时，是以令牌桶中的令牌数是否满足报文的转发为依据。RFC关于令牌桶处理报文的</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/%E8%96%85%E8%B0%B7%E6%AD%8C%E4%BA%91%E7%BE%8A%E6%AF%9B/">
+        <p class="h4 index-header">薅谷歌云羊毛</p>
+      </a>
+
+      <a href="/2020/04/05/%E8%96%85%E8%B0%B7%E6%AD%8C%E4%BA%91%E7%BE%8A%E6%AF%9B/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">一、谷歌云申请 
+
+申请网址：https://console.cloud.google.com/freetrial国家/地区没有中国，随意选择吧
+ 
+
+账号类型选择个人，姓名和地址随意填。
+ 
+
+需要你有支持外币的信用卡，提交后会从你信用卡里扣除1美元，验证后会退还至你的账户。
+ 
+
+申请完成后会收到提示获赠12个月免费试用期并包含300美元，放心用，试用期到期后不会自动续费。
+ 
+
+创建实例并修改防火墙规则配置信息参照 区域选择香港、机器类型选择最低配、系统选择CentOS7、防火墙勾选允许HTTP、HTTPS。
+ 
+
+配置系统并安装BBR和SSR第一步配置sshvm实例创建完毕后，点击“连</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/%E9%92%A2%E7%90%B4%E5%85%A5%E9%97%A8/">
+        <p class="h4 index-header">钢琴入门</p>
+      </a>
+
+      <a href="/2020/04/05/%E9%92%A2%E7%90%B4%E5%85%A5%E9%97%A8/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">什么是钢琴钢琴（Piano forte）由意大利人巴托罗密欧·克里斯托弗里于1709年发明，钢琴属于键盘乐器，用琴键牵动包裹绒毡的琴锤敲打钢丝弦发出声音。钢琴发展史1、羽管键琴（拨弦古钢琴或大键琴），发声原理类似于吉他，用机械传动装置带动一个拨弦的小臂，由羽管博定琴弦，缺点是没办法控制力度，音量总是一样的大小。2、击弦古钢琴（小键琴），用铜楔槌击打琴弦，楔槌不是立即离开琴弦，而是保持在弦上的压力，直到手指离开琴键，因此击弦古钢琴可以用手指去控制音量，但效果细微，并且声音很小。3、现代钢琴，1709年意呆利人克里斯托弗里制造的以琴锤敲打琴弦的键盘乐器，它和小键琴的最大区别是，琴锤敲击琴弦后会立即</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/%E6%88%BF%E5%A5%B4%E4%BB%AC%E4%BD%A0%E5%9C%A8%E6%83%B3peach/">
+        <p class="h4 index-header">房奴们你在想peach</p>
+      </a>
+
+      <a href="/2020/04/05/%E6%88%BF%E5%A5%B4%E4%BB%AC%E4%BD%A0%E5%9C%A8%E6%83%B3peach/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">央行公告2019年12月28日央行发布有关存量房贷利率转换LPR的公告，原文如下：
+概述根据上述公告，存量浮动利率贷款定价基准转换方式有两种，一种是将原合同约定的利率定价方式转换为LPR加点形成的浮动利率，一种是转换为固定利率，对于我们广大房奴来说，我们只关注5年及以上的LPR利率未来走向即可，需要弄明白LPR利率是如何走的。
+LPR报价成员LPR保价成员包含中国的大小银行，同时也包括网络银行、外商独资银行，覆盖面比较全，但是根据历史数据，国有四大银行才是房贷的大头，占中国房贷总额的75%左右（数据来源：21世纪经济报道）
+LPR利率怎么报价央行关于LPR（贷款基准利率，Loan Prime </div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/Noction%20White-Paper/">
+        <p class="h4 index-header">Noction White-Paper</p>
+      </a>
+
+      <a href="/2020/04/05/Noction%20White-Paper/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">前言本片文章来自Noction白皮书部分节选，感兴趣的可以先google下why bgp is not enough这边文章。
+概述企业或者ISP需要部署关键应用，比如电子商务、VoIP、媒体流遇到独特的网络挑战，客户需要7*24h不间断的网络服务，潜在的消极的经济影响由于多G的流量被错误路由，低时延和复杂的配置。
+互联网具有大量的网络路径，通过运行BGP协议的路由器互联，到达同一个路径具有很多条路径，BGP通过一个复杂的算法计算出最佳路径，然而算法并没有考虑网络性能因素和链路代价，度量值。经常将流量路由到拥塞或者更贵的路径上，BGP选择最小数量网络去传送。
+网络工程师试图增加额外的链路提供上</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/Smokeping%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Smokeping搭建及配置</p>
+      </a>
+
+      <a href="/2020/04/05/Smokeping%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Smokeping介绍Smokeping采用rrdtool做支持，生成的网络延迟数据转化图表非常漂亮，支持交互式图形浏览，你可以查看任意时间段的监控数据。 Smokeping也可以部署主/从分布式测量，即用一台服务器作为“主”，其它的服务器作为“从”并向“主”服务器传输数据，最后汇总形成系统监控数据图表。
+官网：https://oss.oetiker.ch/smokeping/GitHub：https://github.com/oetiker/SmokePing
+环境准备安装epel yum源#
+rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
+        <p class="h4 index-header">RFC7348（VxLAN）介绍</p>
+      </a>
+
+      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">title: RFC7348(VxLAN)介绍
+﻿注意：由于RFC7348只是对vxlan做简单定义，并没有详细部署方案，更详细的请参照各设备厂商官方手册。
+背景介绍服务器虚拟化对物理网络设施提出了更高的需求，一台物理机包含多台vm，每台vm都有自己的mac地址，这就要求交换机有非常大的mac地址表象来存储。传统网络中，不同租户vm需要依靠vlan来进行隔离，而目前vlan数目被限制在4096个。DC需要满足不同的租户，不同租户需要有独立的网络域，不同租户的mac地址、vlan、IP规划需要相互独立。此时还要求DC内存在一个大二层的环境，STP技术提供防环的同时也disable很多链路，即便最</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2020/04/05/%E9%98%BF%E9%87%8CDCN%E7%BD%91%E7%BB%9C%E6%BC%94%E8%BF%9B%E5%8F%8A%E6%9C%AA%E6%9D%A5%E8%A7%84%E5%88%92/">
+        <p class="h4 index-header">阿里DCN网络演进及未来规划</p>
+      </a>
+
+      <a href="/2020/04/05/%E9%98%BF%E9%87%8CDCN%E7%BD%91%E7%BB%9C%E6%BC%94%E8%BF%9B%E5%8F%8A%E6%9C%AA%E6%9D%A5%E8%A7%84%E5%88%92/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">2013~2016阿里DCN网络演进说明：本文提到的各项思路来自于前阿里网络专家曹捷，这里只是做了总结。
+2013 IDC建设标准化的建立具体：网络设备配置自动化，架构标准化、配置标准化、架构冗余设计，这些工作提升了阿里网络的交付效率、以及提升网络稳定。
+2014年 提升单IDC的容量具体：单DC服务器容量超过5w、大规模部署40G+10G、干掉DC内部的IGP协议。
+2015年 为云服务提供初代的SDN部署方式（OpenFlow+netconf）当前回顾来看SDN到底是由软件来做还是硬件仍有待商榷、流量可视化
+2016年 25G+自动化运维平台的建立提出三个问题1、为什么要用25G？万兆到2</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-double-right"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "愿你的长夜有星星 月光照黎明&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

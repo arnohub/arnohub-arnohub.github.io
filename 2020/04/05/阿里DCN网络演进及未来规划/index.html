@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Arno">
+  <meta name="keywords" content="">
+  <title>阿里DCN网络演进及未来规划 - Arnohub</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Arnohub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期日, 四月 5日 2020, 8:10 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.4k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      4 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h1 id="2013-2016阿里DCN网络演进"><a href="#2013-2016阿里DCN网络演进" class="headerlink" title="2013~2016阿里DCN网络演进"></a>2013~2016阿里DCN网络演进</h1><p>说明：本文提到的各项思路来自于前阿里网络专家曹捷，这里只是做了总结。</p>
+<h3 id="2013-IDC建设标准化的建立"><a href="#2013-IDC建设标准化的建立" class="headerlink" title="2013 IDC建设标准化的建立"></a>2013 IDC建设标准化的建立</h3><p>具体：网络设备配置自动化，架构标准化、配置标准化、架构冗余设计，这些工作提升了阿里网络的交付效率、以及提升网络稳定。</p>
+<h3 id="2014年-提升单IDC的容量"><a href="#2014年-提升单IDC的容量" class="headerlink" title="2014年 提升单IDC的容量"></a>2014年 提升单IDC的容量</h3><p>具体：单DC服务器容量超过5w、大规模部署40G+10G、干掉DC内部的IGP协议。</p>
+<h3 id="2015年-为云服务提供初代的SDN部署方式（OpenFlow-netconf）"><a href="#2015年-为云服务提供初代的SDN部署方式（OpenFlow-netconf）" class="headerlink" title="2015年 为云服务提供初代的SDN部署方式（OpenFlow+netconf）"></a>2015年 为云服务提供初代的SDN部署方式（OpenFlow+netconf）</h3><p>当前回顾来看SDN到底是由软件来做还是硬件仍有待商榷、流量可视化</p>
+<h3 id="2016年-25G-自动化运维平台的建立"><a href="#2016年-25G-自动化运维平台的建立" class="headerlink" title="2016年 25G+自动化运维平台的建立"></a>2016年 25G+自动化运维平台的建立</h3><h4 id="提出三个问题"><a href="#提出三个问题" class="headerlink" title="提出三个问题"></a>提出三个问题</h4><p>1、为什么要用25G？万兆到25G驱动力是什么<br>2、25G的收敛比多少？<br>3、25G的关键困难点是？<br>SDN对于阿里来说最大的价值不是在于转发的控制，而在于网络自动化运维的极大推进。因此2016年主要工作在于如何实现流量的可视化以及高效的自动化配置与部署。</p>
+<p>做了给予OpenR的48 * 25G+8 * 100G，可以做到1:1的收敛的大管道，上25G的驱动力是sys测IO瓶颈被打破了（SSD+PCIE高速通信），25G的keypoint在于光模块+光纤成本、上架密度的选择（定义25GAOC标准）。</p>
+<p>自动化运维平台，前提是标准化。网络架构的设计会推动网络运营的前进，同时网络运营的结果必须要推进网络架构的设计。架构设计之初一定要充分考虑运营要什么，以及要它的原因是否合理，架构能够提供什么，以及提供的是否具备可落地。在自动化运维平台设计上不会有最优秀的网络架构设计，只会有在合适的时间做合适的事。</p>
+<p>阿里首先做了一下两件事情：1、交换机北向接口的标准化，交换机长期的北向接口都停留在cli方式，这种方式始终无法提供诊断手段以及影响评估手段。这里选择netconf。2、流量可视化，解释讲网络转发质量白盒化（buffer、queue、packetlost、lantency、session/path）</p>
+<h4 id="流量可视化的设计目标"><a href="#流量可视化的设计目标" class="headerlink" title="流量可视化的设计目标"></a>流量可视化的设计目标</h4><p>秒级故障定位–&gt;分钟级故障隔离–&gt;智能引导式故障修复–&gt;网络性能可预测可优化</p>
+<h4 id="DCN的运维数据采集分析思路"><a href="#DCN的运维数据采集分析思路" class="headerlink" title="DCN的运维数据采集分析思路"></a>DCN的运维数据采集分析思路</h4><p>芯片可视化技术创新+成熟的大数据平台+网络应用的关键算法（如何通过最少量的介入转发，能够把整个转发结构抽象画并实现一个完整的转发模型）==&gt;最终完成网络分析管理系统。</p>
+<h3 id="未来的规划"><a href="#未来的规划" class="headerlink" title="未来的规划"></a>未来的规划</h3><p>1、从芯片角度解决资源安全问题；<br>2、open IPOC系统落地；（交换机直接出彩光，并且不是一个硬件化的产品，而是一个软件化，将光的运维和IP的管控结合到一起，创造出一个全新的物理层和应用层之间的流量交互关系）；<br>3、50G/100G以太网接入方案。<br>Broadcom统治着几乎所有DCN芯片市场，资源安全得不到保障、全面同质化造成风险最大化、垄断带来的创新乏力。推动行业上游帮助我们走向我们认为正确的下一代网络设计。</p>
+<h3 id="关于Open-IPOC和DCI的一些思考"><a href="#关于Open-IPOC和DCI的一些思考" class="headerlink" title="关于Open IPOC和DCI的一些思考"></a>关于Open IPOC和DCI的一些思考</h3><p>传统的OTN无法快速迭代创新，满足DCI的设计要求，DCI的设计要求概括到一下几点：快速部署、快速上线、廉价的带宽、管理和运维最大化的自动化。<br>OTN缺陷：<br>OTN的端到端的封闭性、optic和IP的长期隔离、ISP为主导的产业格局（OTN是以ISP为主导的产品，OTT只是一个使用者）</p>
+<h4 id="Open-IPOC的思路和意义"><a href="#Open-IPOC的思路和意义" class="headerlink" title="Open IPOC的思路和意义"></a>Open IPOC的思路和意义</h4><p>1、专业的人做专业的事儿，可以让专业的从事DWDM的人将光的调制解调集成在DCO（Digital Coherent Optical，数字相干光学）解决光的技术疑虑，DCO就是讲整个OTN系统中最关键的ODSP芯片集成在光模块中。<br>2、IP的整个管控方案与optic的融合（光层的流量控制），真正意义上实现DCI从物理层到应用层的统一。<br>3、OTT为主导的技术走向。</p>
+<h3 id="50G-100G"><a href="#50G-100G" class="headerlink" title="50G/100G"></a>50G/100G</h3><p>HPC场景场景下对带宽和性能的需求；<br>更高性能存储技术的应用；<br>带宽单Gb成本的进一步优化。</p>
+<h4 id="风险"><a href="#风险" class="headerlink" title="风险"></a>风险</h4><p>56G serdes（SERializer/DESerializer调制解调的缩写）的技术相对垄断、芯片时间预期太长；<br>追求半导体技术的极限、可能带来的硬件风险；（比如ECC Error错误，memory芯片单比特跳转）；<br>上联到底是200G还是400G?<br>光器件的选择，光模块光纤，QSPF or QSPF-DD？到底是AOC还是DAC。</p>
+<h3 id="DCN网络设计的目标"><a href="#DCN网络设计的目标" class="headerlink" title="DCN网络设计的目标"></a>DCN网络设计的目标</h3><p>1、简单高效、稳定可预期，引入充分竞争<br>2、简单高效：尽可能简化DCN设计中复杂状态和逻辑的加入；<br>3、稳定可预期：充分利用技术能力将网络行为从黑盒转换为白盒；<br>4、引入充分竞争：从最底层的芯片到上层应用设计，技术上都必须是通用的方案，不可盲目的追求所谓的技术先进性。</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">RFC7348（VxLAN）介绍</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/05/My%20Fucking%20Beautiful%20Regal/">
+                        <span class="hidden-mobile">My Fucking Beautiful Regal</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阿里DCN网络演进及未来规划&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

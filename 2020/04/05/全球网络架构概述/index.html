@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Arno">
+  <meta name="keywords" content="">
+  <title>全球网络架构概述 - Arnohub</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Arnohub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期日, 四月 5日 2020, 8:10 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      6 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h1 id="全球海底光缆图"><a href="#全球海底光缆图" class="headerlink" title="全球海底光缆图"></a>全球海底光缆图</h1><p><img src="https://img-blog.csdnimg.cn/20200303230726776.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h1 id="全球互联网多级结构"><a href="#全球互联网多级结构" class="headerlink" title="全球互联网多级结构"></a>全球互联网多级结构</h1><p>全球互联网是多级结构，下级运营商需要购买上级运营商的转接带宽实现互联；平级运营商之间的对等互联，最底层运营商主要通过购买传送带宽实现全球通达，而顶级运营商只出口转接带宽或做少量的对等互联，而不需要购买转接带宽。</p>
+<p>全球Tier1运营商能够通过对等关系获取全球路由表；网络可以通达多个洲；与多个洲内的其他运营商实现互联；在多个洲拥有或者租用洲际光缆。对等（peer）：访问对方的ISP和它的转接客户；对等互联通常采取互不结算的方式，同时也存在小网向大网付费情况。</p>
+<p>转接（transit）：通过转接ISP访问全互联网；被转接方向转接方支付费用。互联又分为专用对等互联：在两个规模接近的ISP之间直接通过专有的链路相连；公共对等互联：在集中的物理位置上，接入多个网络，多个ISP之间通过共享连接方式实现多点流量的交换，IX或NAP。</p>
+<h1 id="全球互联网大区互联情况"><a href="#全球互联网大区互联情况" class="headerlink" title="全球互联网大区互联情况"></a>全球互联网大区互联情况</h1><p>北美：互联网中心，ATT、Verizon、Sprint等是美国顶级互联网供应商，在全球出售转接带宽业务，以专用对等互联为主，接入IX比较的规模比较小。</p>
+<p>欧洲：各国互联比较均等，IX发展的最好，目前大约有115个比较活跃的IX。</p>
+<p>亚洲：逐步形成以日本、韩国、新加坡、香港为中心的亚洲地区互联网中心。位于伦敦的LINX（London Internet Exchange） IX，目前的基本概览如下，目前接入880个AS，遍布全球80个国家（2019.4）。该组织为非盈利的，收取的会员费用运行，基于公平共享的原则，所有费用成员平均分摊。</p>
+<h1 id="全球网站访问top50排名"><a href="#全球网站访问top50排名" class="headerlink" title="全球网站访问top50排名"></a>全球网站访问top50排名</h1><p><a href="https://www.alexa.com/topsites" target="_blank" rel="noopener">https://www.alexa.com/topsites</a><br>中国流量最高的是tmall.com，全球第3，qq.com排名第四，baidu.com第五（2020.3.3日数据）</p>
+<h1 id="国际互联网态势"><a href="#国际互联网态势" class="headerlink" title="国际互联网态势"></a>国际互联网态势</h1><p>1、目前仍然是以欧美为中心，尤其是美国占据了互联网的绝大部分资源；<br>2、Tier1之间不付费实现全互联，Tier2向Tier1支付转接带宽费；<br>3、北美以专用网间互联为主，公共对等互联为辅；<br>4、欧洲网间互联大多采用接入IX来实现的，包括Tier2和部分Tier1；<br>5、国际互联网格局处于转型期，区域Tier1逐步出现；<br>6、国外的IX同时负载国内和国际流量的转发，采用商业化形式运作；<br>7、全球访问量排名前列的最集中在美国。</p>
+<h1 id="典型Tier1运营商互联情况"><a href="#典型Tier1运营商互联情况" class="headerlink" title="典型Tier1运营商互联情况"></a>典型Tier1运营商互联情况</h1><p>#</p>
+<h1 id="典型Tier2运营商互联情况"><a href="#典型Tier2运营商互联情况" class="headerlink" title="典型Tier2运营商互联情况"></a>典型Tier2运营商互联情况</h1><p>#</p>
+<h1 id="我国互联网国际出口流量分析"><a href="#我国互联网国际出口流量分析" class="headerlink" title="我国互联网国际出口流量分析"></a>我国互联网国际出口流量分析</h1><p>中国国际出口海底光缆一条是亚太直达海底光缆（APG，Asia Pacific Gateway）中国节点在上海崇明&amp;南汇，香港三个节点；<br>跨太平洋快线TPE（Trans-Pacific Express），中国节点在上海崇明和山东青岛；<br>国际互联、国内互联带宽和流量情况：国际出口带宽占比25%，国际出口流量占比9%；<br>国际出口出入流量占比：美国方向基本1:1（相差10%以内）；日韩入大于出（相差30%）；欧洲出大约入（相差20%）；<br>中国top50 网站占19个，占比38。（2020.3）；<br>中国网民总数8.29亿（普及率59.6%），手机网民总数8.17亿，国际出口带宽约为9000Gb，我国国际出口带宽费用为10.5w/G/月，欧美国际IX报价为1w/G/月。各运营商骨干国际出口带宽分布如下图所示：（数据来源CNNIC2018年12月发布的《中国互联网发展状况统计报告》）。<br><img src="https://img-blog.csdnimg.cn/20200303232742761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h1 id="现存问题"><a href="#现存问题" class="headerlink" title="现存问题"></a>现存问题</h1><p>1、国际互联主要依赖Tier1运营商转接，直接互联peer比较少。<br>2、互联费用比较高，需要借助Tier1运营商转接。<br>3、互联点保护性不强，国际光缆资源少，光缆中断风险大，路由单一。</p>
+<p>我国互联网国际地位比较低，位于全球互联网中下层，同时我国互联网在信息源、网络等方面的处于劣势。信息和用户资源是网络价值中影响互联网的重要因素。<br>1、信源劣势：首先我国互联网接入国际领先内容提供上的数量少，国内ICP的创新程度远不及国际的ICP。国内ICP在很大程度上依赖于国际网站。<br>2、用户优势：我国宽带用户数目全球第一。<br>3、网络劣势：与国际top运营商存在数量级的差距。</p>
+<h1 id="我国互联网网间互联概况"><a href="#我国互联网网间互联概况" class="headerlink" title="我国互联网网间互联概况"></a>我国互联网网间互联概况</h1><p>我国互联网互联方式分为直连方式和NAP方式（IX），以直连方式为主，IX为辅。<br>1、直连方式：两个互联单位之间在骨干路由器上通过点到点的直连数据链路相连；<br>2、NAP点方式：两个或多个互联单位网络交汇的公共平台，负责把不同的互联单位的IP网络连接，具备数据转发和路由发布功能。<br>目前我国有7个全国性互联单位之间骨干网络的互联，分别为：三大运营商（电信、联通、移动）、教育和科研网（CERNET）、经贸网、长城网、科技网。国家级NAP有北京NAP、上海NAP、广州NAP。<br>我国互联网网间存在的问题：<br>1、政策问题，包括接入单位比较少，管控不到位，同时接入资费比国际IX贵很多（相差100倍）。<br>2、技术问题，互联资源少，各单位接入带宽小，设备陈旧，技术落后，容量小，设备存在安全隐患。</p>
+<h1 id="发展目标"><a href="#发展目标" class="headerlink" title="发展目标"></a>发展目标</h1><p>1、国际地位：利用用户规模的优势，把握移动互联网发展契机，提升互联网地位；<br>2、内容源：引入访问量大的国际热点内容源，加快国内热点内容源的国际化，基于移动互联网发展自主创新的内容和业务；<br>3、交换中心：接入欧洲大型的IX，尽可能多的与Tier2建立对等互联。<br>做好peering和transit的协商策略，全球网络为了满足于国际ISP用户建立peer关系实现业务互通，但是实际操作中与对端ISP进行peering会由于不了解需求提出方网络或者业务规模，而不愿意建立peer。（我国互联网国际地位较低，严格限制了我国互联网的发展）</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/18/HPCC%EF%BC%88%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%EF%BC%89/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">HPCC（高精度拥塞控制）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/05/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%85%B3/">
+                        <span class="hidden-mobile">流量控制相关</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "全球网络架构概述&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

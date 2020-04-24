@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Arno">
+  <meta name="keywords" content="">
+  <title>流量控制相关 - Arnohub</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Arnohub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期日, 四月 5日 2020, 8:10 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    4.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      14 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h2 id="令牌桶简介"><a href="#令牌桶简介" class="headerlink" title="令牌桶简介"></a>令牌桶简介</h2><p>TP（Traffic Policing）流量监管，监督不同流量进入网络的速率，对超出的部分流量进行惩罚；<br>TS（Traffic Shaping）流量整形，主动调整流量输入的速率，达到削峰填谷；<br>LR（Line Rate）接口限速，对一个接口上发送或接收的全部报文的总速率进行限制。<br>上述措施实施的条件是必须要知道流量是否超出规格，一般采用令牌桶对流量的规格进行评估。<br>令牌桶可以看做一个存放一定数量令牌的容器，系统按照设定的速度向桶中放置令牌，当桶中令牌满时，多出的令牌溢出，桶中令牌不再增加，使用令牌桶对流量规格进行评估时，是<strong><em>以令牌桶中的令牌数是否满足报文的转发为依据</em></strong>。<br>RFC关于令牌桶处理报文的方式定义了以下标记算法：<br>-单速率三色标记算法：主要关注报文尺寸的突发；<br>-双速率三色标记算法：主要关注报文速率的突发。<br>令牌桶算法的评估结果都为报文打上red、yellow、green三种颜色标记，QoS会根据报文的颜色做相应的处理，两种模式都可以工作于色盲模式和色敏模式。<br>色盲模式详细介绍下标记算法。</p>
+<h2 id="单速双桶"><a href="#单速双桶" class="headerlink" title="单速双桶"></a>单速双桶</h2><p>单速双桶采用RFC2697定义的单速三色标记器对流量进行测评，根据评估结果对报文标记颜色。<br>两个令牌桶称为C桶和E桶，用Tc和Te表示桶中的令牌数量，单速双桶有3个参数：<br>-CIR（Committed Information Rate）：承诺信息速率，表示向C桶中投放令牌的速率，即C桶允许传输或转发报文的平均速率；<br>-CBS（Committed Burst Size）：承诺突发尺寸，表示C桶的容量，即C桶瞬间能够通过的突发流量；<br>-EBS（Excess Burst Size）：超额突发尺寸，表示E桶的容量，即E桶瞬间能够通过的超出突发流量。<br>在单速双桶模式下当用户的流量速率小于配置的CIR时，报文被标记为green，当用户的突发流量大于配置的CBS小于EBS时，报文被标记为yellow，当用户突发流量大于配置的EBS时，报文被标记为red。<br>假设设备接口的CIR设置为1Mb/s，CBS为2000bytes，EBS为2000bytes，初始状态C桶和E桶为满，单速双桶模式下，令牌桶对报文处理过程如下：<br>1、假设第1个报文大小为1500bytes，此时报文长度小于CIR，报文被标记为绿色，此时Tc减少1500bytes，剩余500bytes；<br>2、假设1ms之后第2个大小为1500bytes的报文到达，在此间隔内，Tc增加，1Mb/s*1ms=1000bit=125bytes，即此时Tc为625bytes，此时发现C桶的令牌数不够，检查发现E桶有足够的令牌数，此时报文被标记为黄色，E桶令牌数减少1500bytes，剩余500bytes，C桶数目625bytes不变。<br>3、假设又1ms后第3个大小为1000bytes的报文到达，此时Tc数为750bytes，数目不够，Te剩余500bytes也不够，此时报文被标记为红色。<br>4、假设又过20ms，第4个大小为1500bytes的报文到达，再次间隔内，Tc增加2500bytes，由于CBS为2000bytes，加上原来的750bytes，共有2500+750-2000=1250bytes溢出被添加到E桶中，此时Te为1750bytes，由于报文大小小于Tc，因此报文被标记为黄色，Te为500bytes，Te为1750数目不变。</p>
+<h2 id="单速单桶"><a href="#单速单桶" class="headerlink" title="单速单桶"></a>单速单桶</h2><p>只有C桶，E桶容量为0</p>
+<h2 id="双速双桶"><a href="#双速双桶" class="headerlink" title="双速双桶"></a>双速双桶</h2><p>RFC2698中定义了双速三色标记器对流量进行测评，根据评估结果对报文标记颜色。<br>两个令牌桶称为P桶和C桶，用Tp和Tc分别表示对应桶中令牌的数量。双速双通有4个参数：<br>-PIR（Peak Information Rate）峰值信息速率，表示向P桶中投放令牌的速率，表示向P桶中投放令牌的速率，即P桶允许传输或转发报文的峰值速率；<br>-CIR：<br>-PBS（Peak Burst Size）峰值突发尺寸，表示P桶容量，即P桶能够通过的峰值突发流量；<br>-CBS：</p>
+<h2 id="WRR和WFQ调度算法应用比较"><a href="#WRR和WFQ调度算法应用比较" class="headerlink" title="WRR和WFQ调度算法应用比较"></a>WRR和WFQ调度算法应用比较</h2><p>WRR（Weighted Round Robin）加权轮训调度，分比为每个队列分配不同的权重，即可实现差分服务；<br>WFQ（Weighted Fair Queueing）加权公平队列。<br>查看WRR和WFQ性能测试的论文，结论为：<br>当分组长度相同时，调度算法的行为只受不同队列优先级的影响，因而WFQ 算法退化为WRR，与WRR算法性能几乎一致；<strong><em>当分组长度不同时，ＷFＱ会有较好的时延性能，而WRR算法由于未考虑分组长度的不同而引入的不公平性，不能保证高优先级队列的低时延要求</em></strong>。</p>
+<h2 id="华为设备拥塞避免和拥塞管理"><a href="#华为设备拥塞避免和拥塞管理" class="headerlink" title="华为设备拥塞避免和拥塞管理"></a>华为设备拥塞避免和拥塞管理</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>拥塞避免通过指定报文丢弃策略来解除网络过载，拥塞管理通过指定报文调度次序来保证高优业务先被处理。<br>什么是拥塞：由于网络资源不足造成速率下降、引入额外延时的一种显现，会造成报文传输时延、吞吐率低、及资源的大量消耗。</p>
+<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><p>拥塞避免通过监控网络资源（队列或端口缓存区）的使用情况，在拥塞发生或者有加剧趋势时主动丢弃报文，来缓解网络过载的机制。<br>拥塞避免常见的两种方式：<br><strong>-tail drop</strong>：同等对待所有报文，不对报文进行服务等级区分，发生拥塞时队列尾部数据报文将被丢弃，直到拥塞解除；（即对新到的报文全部丢弃）<br>但是该策略会引起TCP全局同步显现，所谓的TCP全局同步现象，是指当多个队列同时丢弃多个TCP连续报文时，将造成经过该设备所有TCP连接同时进入拥塞避免和慢启动状态，降低流量以解除拥塞，而后这些TCP连接又会在某个时刻同时出现流量高峰，如此反复，使网络流量忽大忽小，影响链路利用率。<br><strong>-wred</strong>：加权随机先期丢弃（Random Early Drop），基于丢弃参数随机丢弃报文，这样做的好处时，随机丢弃的报一定概率属于同一个TCP流，某些流的报文可能不被被丢弃，因此会有更少的TCP流进入半启动过程，以提升带宽利用率。</p>
+<h3 id="TCP拥塞避免和慢启动简介"><a href="#TCP拥塞避免和慢启动简介" class="headerlink" title="TCP拥塞避免和慢启动简介"></a>TCP拥塞避免和慢启动简介</h3><p>慢启动，一个TCP连接启动的时候并不知道cwnd设置多大合适，因此TCP发送方会从一个较小的初始值按照指数增加到某一个值（慢启动门限，ssthresh），这个cwnd提升的过程就叫做慢启动。除了初始建立tcp连接后的数据使用慢启动外，在TCP超时重传、TCP空闲一段时间后重新开始数据发送，这些场景下会触发慢启动过程。具体慢启动的一些细节参照tcp/ip详解。<br>拥塞避免，从慢启动过程可以看到cwnd可以很快增长，从而最大程度利用网络带宽资源，cwnd指数增长会有一个上限叫慢启动门限，当cwnd超过这个值后就进入拥塞避免阶段。具体思路为让cwnd按照接近线性缓慢地增大，当收到delay ack时，cwnd的增长仍然接近线性，只是增长速度相对慢些。</p>
+<h3 id="拥塞管理"><a href="#拥塞管理" class="headerlink" title="拥塞管理"></a>拥塞管理</h3><p>当发生拥塞时，通过调节报文的调度次序来满足时延敏感业务高QoS服务的一种机制。<br><strong>PQ</strong>，队列优先，会导致低优先队列饿死；（即SP，严格的队列优先）<br><strong>WFQ</strong>，加权公平队列，相对于WRR算法来说，WFQ短报文和长报文获得公平的调度，如果不同队列同时存在多个长报文和短报文发送，让短报文优先获得调度，从而总体上减<br>少各个流报文的时间差。WFQ调度在报文进入队列之前，先对流量进行分类，根据hash因子（包括ToS字段的优先级）尽可能的将不同的流放入到不同的队列中，在出队列时按照流的优先级来分配每个流应占的带宽，优先级越小分配的带宽越小，从而总体上均衡各个流的延迟。（分为按照流的优先级分裂或按照流分类）。</p>
+<h2 id="微突发"><a href="#微突发" class="headerlink" title="微突发"></a>微突发</h2><p>微突发是指端口在非常短的时间（毫秒级别）内收到非常多得突发数据，以至于瞬时突发速率达到平均速率的十倍、百倍，甚至超过端口线速带宽的现象。由于设备监控流量颗粒度的问题，一般很难发现，但是可以从端口的dropped日志和接口下的Discard数据包中看出曾出现过微突发。<br>1、问题，为什么微突发时交换机没有上报缓存超限告警？<br>交换机获取端口缓存使用情况，只能依赖CPU的轮训机制，CPU轮训的interval比较长，探测不到。<br>2、问题，终端server的业务是随机的，不会有多大的为突发。<br>业务的随机性在微观程度可能体现非常极端的两面，一个极端是时时刻刻都有业务流量，流量总体平稳；另一个极端是一会儿有大量流量高速转发，一会儿又没数据，突发严重。业务的随机性不等于TCP发包的随机性，传统cpu的机制总是尽快抢占带宽把数据发送完，所以传统的TCP发包在微观上突发性普遍很强。同时服务器的端口带宽越高，往往突发也就越强，因此在25G环境时微突发会更普遍？<br>当微突发流量瞬时速率超过交换机的转发能力时，交换机会将突发的数据进行缓存，当交换机没有足够的缓存，那么超出的数据只能丢弃。</p>
+<p>下面以具体例子来说明微突发的过程<br><img src="https://img-blog.csdnimg.cn/20200308000242600.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>假设port1 和 port2 同时以10Gbps的线速向port3发送5M的数据，由于port3口的速率也是10Gbps，因此会有5M的数据需要先缓存起来，假设交换机只有1M的缓存，此时会有4M的数据被丢弃，并且这个突发持续时间为5MB/10Gbps = 4ms，而目前交换机整机缓存大小为1~20MB，对于10G限速的两个端口二打一的情况，最大可承受的突发持续时间为&lt;16ms（20MB/10Gbps），实际网络中，不止二打一，对缓存消耗会更严重。</p>
+<h3 id="微突发解决办法"><a href="#微突发解决办法" class="headerlink" title="微突发解决办法"></a>微突发解决办法</h3><p>1、端口或全局下开启：qos burst-mode enhanced 将接口下缓存管理的突发模式为增强模式。这样让业务端口共享更多芯片缓存buffer。（实测CE6800系列交换机效果显著）；<br>2、针对传统的TCP拥塞机制中存在突发严重、过渡消耗交换机缓存等问题，服务器测利用技术保证不会过渡、过快、突发国强地发包，从根源上减少微突发；<br>3、在时延可控和缓存充足的情况下，在发生拥塞的转发设备上游交换机下行接口开启流量整形，削弱流量的瞬时波峰，控制突发程度，但是此方案会导致报文转发时延加大。这个流量整形主要是通过令牌桶技术来对出端口速率做限制的，避免流量过高的从端口发出。后面配置的# qos queue * # shaping cir cbs 等是通过调整令牌桶里令牌的数量来对速率进行限制的。<br>4、网络中所有设备的接口均通过dcb pfc enable 开启流量控制功能，在转发设备发生拥塞时，通知上游设备降低转发包速率，甚至停止发包，待拥塞解除以后再恢复报文的正常发送，需要注意的是，此方案同样会带来时延增大的问题。<br>5、使用telemetry来增加对微突发的监控。<br>6、芯片层面支持对交换机丢包的实时监控，一旦芯片层面有丢包，自动通告。</p>
+<h2 id="PFC简介"><a href="#PFC简介" class="headerlink" title="PFC简介"></a>PFC简介</h2><p>传统的Pause机制是当端口收缓到达阈值的时候，立即发送Pause帧，让对端停止发送数据，这种Pause机制不符合IP流程和RoCE流量混跑时共享链路的需求，而PFC则提供一种更细粒度的Pause控制。即 <strong><em>PFC是一种基于队列的流控机制</em></strong>，它使得发送设备的发送端口分成最多8个队列，接收端口的接收缓存也是针对每个队列区分的，因此当某个队列的缓存达到阈值时，指向该队列发送Pause帧，通知对端停止发送该队列的RoCE流量，而其他队列的流量不收影响。<br>PFC的目的是消除链路由于拥塞而出现的丢包，PFC帧的发送必须满足一定的时间要求，如果发送在自己接收队列缓存慢之后再发送PFC帧，PFC帧从发送端到接收端传输过程中，另一端由于没有足够的接收缓存而存在丢包问题，如果过早的发送会导致带宽利用率下降，因此在接收缓存中定义了一个headroom的缓存值，这部分缓存目的就是存储PFC帧传输过程中对端继续发过来的数据。<br>headroom缓存大小必须要存够一定时间内对端发过来的数据，包括：<br>1、接收数据端接收缓存达到一定阈值，产生PFC请求及PFC帧的排队时间；<br>2、PFC帧在链路中传输的时间；<br>3、PFC帧在接收端排队时间；<br>4、PFC帧在接收端处理并终止该队列发送数据的时间。<br>PFC同时也会引入其他问题：<br>1、PFC deadlock（根本原因是mac表项早于arp表项超时，目前交换机的arp表象都是绑定出接口，理论上不会出现死锁）<br>2、PFC Unfairness<br>3、Victim Flow<br>4、PFC Pause Storm</p>
+<h2 id="ETS简介"><a href="#ETS简介" class="headerlink" title="ETS简介"></a>ETS简介</h2><p>Enhanced Transmission Selection，类似现网的QoS，将不同优先级映射到不同的priority-group，然后基于队列做带宽控制，华为引入了priority-group的概念，在IP和RDMA融合的网络上会出现三种流量，管理流量、普通的IP流量、RoCE流量，我们可以将这三种流量标记为不同的优先级，然后用PQ或者WRR进行带宽控制。<br>ETS提供了两级调度，分别基于优先级组PG（Priority Group）和优先级Priority，首先接口先对优先级组进行第一级调度，然后再对优先级内的优先级队列进行第二级调度。相对于QoS来说，ETS优势在于提供了基于优先级组的调度。<br>优先级组即一组拥有相同调度属性的端口优先级的队列，用户可以设置将不同的优先级加入到优先级组中，比如PG 15业务比较重要，对延迟比较敏感，采用PQ调度。PG0和PG1位普通业务，采用RR调度。<br><img src="https://img-blog.csdnimg.cn/20200308001528812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>如上图所示，优先级为3的队列承载的试FCoE流量，将其放到SAN的优先级组内(PG1)，优先级0、1、2、4、5为普通业务流量，将其划入普通的LAN优先级组内（PG0），优先级7的队列为IPC流量，划入IPC优先级组内(PG15)。接口总带宽为10G，PG0和PG1分配50%的带宽，即为5G。在t1和t2时刻，接口的总带宽不超过10G，所有流量正常转发，在t3时刻内总流量超过给定的带宽，切LAN流量超过给定的5G，因此此时会有1G的LAN流量被丢弃。</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/05/%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">全球网络架构概述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/05/%E8%96%85%E8%B0%B7%E6%AD%8C%E4%BA%91%E7%BE%8A%E6%AF%9B/">
+                        <span class="hidden-mobile">薅谷歌云羊毛</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "流量控制相关&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
