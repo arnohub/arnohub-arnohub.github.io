@@ -149,19 +149,20 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
-        <p class="h4 index-header">RFC7348（VxLAN）介绍</p>
+      <a href="/2020/04/05/Smokeping%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Smokeping搭建及配置</p>
       </a>
 
-      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
+      <a href="/2020/04/05/Smokeping%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">title: RFC7348(VxLAN)介绍
-﻿注意：由于RFC7348只是对vxlan做简单定义，并没有详细部署方案，更详细的请参照各设备厂商官方手册。
-背景介绍服务器虚拟化对物理网络设施提出了更高的需求，一台物理机包含多台vm，每台vm都有自己的mac地址，这就要求交换机有非常大的mac地址表象来存储。传统网络中，不同租户vm需要依靠vlan来进行隔离，而目前vlan数目被限制在4096个。DC需要满足不同的租户，不同租户需要有独立的网络域，不同租户的mac地址、vlan、IP规划需要相互独立。此时还要求DC内存在一个大二层的环境，STP技术提供防环的同时也disable很多链路，即便最</div>
+          <div class="index-text mb-1">Smokeping介绍Smokeping采用rrdtool做支持，生成的网络延迟数据转化图表非常漂亮，支持交互式图形浏览，你可以查看任意时间段的监控数据。 Smokeping也可以部署主/从分布式测量，即用一台服务器作为“主”，其它的服务器作为“从”并向“主”服务器传输数据，最后汇总形成系统监控数据图表。
+官网：https://oss.oetiker.ch/smokeping/GitHub：https://github.com/oetiker/SmokePing
+环境准备安装epel yum源#
+rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6</div>
         </div>
       </a>
 
@@ -179,20 +180,19 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a href="/2020/04/05/Smokeping%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
-        <p class="h4 index-header">Smokeping搭建及配置</p>
+      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
+        <p class="h4 index-header">RFC7348（VxLAN）介绍</p>
       </a>
 
-      <a href="/2020/04/05/Smokeping%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
+      <a href="/2020/04/05/RFC7348%EF%BC%88VxLAN%EF%BC%89%E4%BB%8B%E7%BB%8D/">
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Smokeping介绍Smokeping采用rrdtool做支持，生成的网络延迟数据转化图表非常漂亮，支持交互式图形浏览，你可以查看任意时间段的监控数据。 Smokeping也可以部署主/从分布式测量，即用一台服务器作为“主”，其它的服务器作为“从”并向“主”服务器传输数据，最后汇总形成系统监控数据图表。
-官网：https://oss.oetiker.ch/smokeping/GitHub：https://github.com/oetiker/SmokePing
-环境准备安装epel yum源#
-rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6</div>
+          <div class="index-text mb-1">title: RFC7348(VxLAN)介绍
+﻿注意：由于RFC7348只是对vxlan做简单定义，并没有详细部署方案，更详细的请参照各设备厂商官方手册。
+背景介绍服务器虚拟化对物理网络设施提出了更高的需求，一台物理机包含多台vm，每台vm都有自己的mac地址，这就要求交换机有非常大的mac地址表象来存储。传统网络中，不同租户vm需要依靠vlan来进行隔离，而目前vlan数目被限制在4096个。DC需要满足不同的租户，不同租户需要有独立的网络域，不同租户的mac地址、vlan、IP规划需要相互独立。此时还要求DC内存在一个大二层的环境，STP技术提供防环的同时也disable很多链路，即便最</div>
         </div>
       </a>
 
