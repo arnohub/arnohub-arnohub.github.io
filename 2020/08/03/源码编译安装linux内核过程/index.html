@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Arno">
   <meta name="keywords" content="">
-  <title>薅谷歌云羊毛 - Arnohub</title>
+  <title>源码编译安装linux内核过程 - Arnohub</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -124,7 +124,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期日, 四月 5日 2020, 8:10 晚上
+                  星期一, 八月 3日 2020, 2:02 下午
                 </p>
               
 
@@ -133,7 +133,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    717 字
+                    620 字
                   </span>
                 
 
@@ -169,127 +169,35 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <h1 id="一、谷歌云申请"><a href="#一、谷歌云申请" class="headerlink" title="一、谷歌云申请"></a>一、谷歌云申请</h1><html ><hr> </html>
-
-<p>申请网址：<a href="https://console.cloud.google.com/freetrial" target="_blank" rel="noopener">https://console.cloud.google.com/freetrial</a><br><img src="https://img-blog.csdnimg.cn/20200217014255574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>国家/地区没有中国，随意选择吧</p>
-<html ><hr> </html>
-
-<p><img src="https://img-blog.csdnimg.cn/20200217014340665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>账号类型选择个人，姓名和地址随意填。</p>
-<html ><hr> </html>
-
-<p><img src="https://img-blog.csdnimg.cn/20200217014843313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>需要你有支持外币的信用卡，提交后会从你信用卡里扣除1美元，验证后会退还至你的账户。</p>
-<html ><hr> </html>
-
-<p><img src="https://img-blog.csdnimg.cn/20200217015405678.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>申请完成后会收到提示获赠12个月免费试用期并包含300美元，放心用，试用期到期后不会自动续费。</p>
-<html ><hr> </html>
-
-<h1 id="创建实例并修改防火墙规则"><a href="#创建实例并修改防火墙规则" class="headerlink" title="创建实例并修改防火墙规则"></a>创建实例并修改防火墙规则</h1><p><img src="https://img-blog.csdnimg.cn/20200217020212721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020021702005285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>配置信息参照 <strong><em>区域选择香港</em></strong>、<strong><em>机器类型选择最低配</em></strong>、<strong><em>系统选择CentOS7</em></strong>、<strong><em>防火墙勾选允许HTTP、HTTPS</em></strong>。</p>
-<html ><hr> </html>
-
-<h1 id="配置系统并安装BBR和SSR"><a href="#配置系统并安装BBR和SSR" class="headerlink" title="配置系统并安装BBR和SSR"></a>配置系统并安装BBR和SSR</h1><h3 id="第一步配置ssh"><a href="#第一步配置ssh" class="headerlink" title="第一步配置ssh"></a>第一步配置ssh</h3><p>vm实例创建完毕后，点击“连接”-“在浏览器窗口中打开”<br><img src="https://img-blog.csdnimg.cn/20200217021028801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>输入以下命令：</p>
-<pre><code class="bash"># 切换至root，修改root密码
-sudo su -
-passwd *****
-#
-# 开启root密码验证，并重启机器或重启sshd服务，方便远程管理
-sed -i &#39;s/PermitRootLogin no/PermitRootLogin yes/g&#39; /etc/ssh/sshd_config;sed -i &#39;s/PasswordAuthentication no/PasswordAuthentication yes/g&#39; /etc/ssh/sshd_config;reboot
-#</code></pre>
-<html ><hr> </html>
-
-<h3 id="第二步安装：BBR"><a href="#第二步安装：BBR" class="headerlink" title="第二步安装：BBR"></a>第二步安装：BBR</h3><p>BBR是Google开发的新的TCP拥塞控制算法，有利于提升服务器带宽吞吐、降低延迟，感兴趣的同学可以研究下原理：<br><a href="https://cloud.tencent.com/developer/article/1369617" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1369617</a></p>
-<pre><code class="bash"># 安装wget
-yum install wget -y
-#
-# 安装bbr
-wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
-chmod +x bbr.sh
-#</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20200217031159496.png" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>按任意键开始安装，安装脚本包含升级内核的操作，可能需要几分钟，耐心等待，安装完成后需要重启虚机。</p>
-<html ><hr> </html>
-
-<h3 id="第三步：安装SSR"><a href="#第三步：安装SSR" class="headerlink" title="第三步：安装SSR"></a>第三步：安装SSR</h3><pre><code class="bash">#
-wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
-#
-chmod +x shadowsocks-all.sh
-#
-./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log
-#</code></pre>
-<p>按照提示信息进行安装，推荐以下加密和混淆方式。</p>
-<pre><code class="bash">Which Shadowsocks server you&#39;d select:
-1) Shadowsocks-Python
-2) ShadowsocksR
-3) Shadowsocks-Go
-4) Shadowsocks-libev
-Please enter a number (Default Shadowsocks-Python):2
-
-You choose = ShadowsocksR
-
-Please enter password for ShadowsocksR
-(Default password: teddysun.com):******
-
-password = ******
-
-Please enter a port for ShadowsocksR [1-65535]
-(Default port: 13202):19000
-
-port = 19000
-
-Please select stream cipher for ShadowsocksR:
-1) none
-2) aes-256-cfb
-3) aes-192-cfb
-4) aes-128-cfb
-5) aes-256-cfb8
-6) aes-192-cfb8
-7) aes-128-cfb8
-8) aes-256-ctr
-9) aes-192-ctr
-10) aes-128-ctr
-11) chacha20-ietf
-12) chacha20
-13) salsa20
-14) xchacha20
-15) xsalsa20
-16) rc4-md5
-Which cipher you&#39;d select(Default: aes-256-cfb):11
-
-cipher = chacha20-ietf
-
-Please select protocol for ShadowsocksR:
-1) origin
-2) verify_deflate
-3) auth_sha1_v4
-4) auth_sha1_v4_compatible
-5) auth_aes128_md5
-6) auth_aes128_sha1
-7) auth_chain_a
-8) auth_chain_b
-9) auth_chain_c
-10) auth_chain_d
-11) auth_chain_e
-12) auth_chain_f
-Which protocol you&#39;d select(Default: origin):3
-
-protocol = auth_sha1_v4
-
-Please select obfs for ShadowsocksR:
-1) plain
-2) http_simple
-3) http_simple_compatible
-4) http_post
-5) http_post_compatible
-6) tls1.2_ticket_auth
-7) tls1.2_ticket_auth_compatible
-8) tls1.2_ticket_fastauth
-9) tls1.2_ticket_fastauth_compatible
-Which obfs you&#39;d select(Default: plain):6
-
-obfs = tls1.2_ticket_auth
-
-
-Press any key to start...or Press Ctrl+C to cancel</code></pre>
-<p>按任意键开始安装，可能需要几分钟，耐心等待。<br><img src="https://img-blog.csdnimg.cn/202002170330002.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RhbmJvX2JpbGk=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>当出现以下提示时安装成功。</p>
-<h1 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h1><p>Windows&amp;iOS下使用shadowsocks即可。</p>
+              <h2 id="源码编译安装linux内核过程"><a href="#源码编译安装linux内核过程" class="headerlink" title="源码编译安装linux内核过程"></a>源码编译安装linux内核过程</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>阿里去堆叠方案需求</p>
+<p>测试环境：CentOS&amp;Ubuntu，注意这里bond的源码修改是针对mode2&amp;mode4，由于模拟lacp环境比较复杂，测试环境仅测试mode2，物理机环境mode4环境下已测试可用。查看代码发现Kernel≥4.0都可用，具体如何修改这里就不放了，如有需求请加微信。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1、下载内核源码包导入到/usr/src、/usr/src/kernels</p>
+<p>2、解压：tar -zxvf linux-5.7.12.tar.gz</p>
+<p>3、改bond模块源代码</p>
+<p>4、配置内核功能和模块，在系统原有的内核配置文件的基础上建立新的编译选项，按需配置的话使用：make menuconfig</p>
+<p>cp /boot/config-2.6.32-754.31.1.el6.x86_64 .config<br>sh -c ‘yes “” | make oldconfig’<br>make oldconfig</p>
+<p>5、安装GCC开发工具</p>
+<p>CentOS：<br>yum groupinstall “Development Tools”<br>yum install ncurses-devel bison flex elfutils-libelf-devel openssl-devel<br>CentOS6.10默认GCC版本过低，编译过程报错，建议升级到7.*及以上版本：<br>yum -y install centos-release-scl<br>yum -y install devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils scl enable devtoolset-7 bash<br>echo “source /opt/rh/devtoolset-7/enable” &gt;&gt;/etc/profile</p>
+<p>Ubuntu：<br>apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev</p>
+<p>6、更改bond源码以实现arp多发</p>
+<p>7、编译内核：make  （不建议使用多线程编译，容易出现各种报错。make -j 4 &amp;&amp; make -j $(nproc)）</p>
+<p>8、安装内核模块：make modules_install</p>
+<p>9、安装内核：make install</p>
+<p>10、更新grub配置：</p>
+<p>grub2-mkconfig -o /boot/grub2/grub.cfg<br>grubby –set-default /boot/vmlinuz-***</p>
+<p>如无grub2命令，也可修改grub配置文件：vim /boot/grub/grub.conf</p>
+<p>default=0  #这里设定默认启动内核位置，从0开始，一般新安装的内核在第一个位置，所以这里设置default=0<br>timeout=5<br>splashimage=(hd0,0)/grub/splash.xpm.gz<br>hiddenmenu<br>title CentOS (5.7.12)<br>        root (hd0,0)<br>        kernel /vmlinuz-5.7.12 ro root=UUID=61568c83-750d-479f-82e4-32e08dfd6cb8 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet<br>        initrd /initramfs-5.7.12.img<br>title CentOS (2.6.32-754.31.1.el6.x86_64)<br>        root (hd0,0)<br>        kernel /vmlinuz-2.6.32-754.31.1.el6.x86_64 ro root=UUID=61568c83-750d-479f-82e4-32e08dfd6cb8 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet<br>        initrd /initramfs-2.6.32-754.31.1.el6.x86_64.img</p>
+<p>11、重启：reboot</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>验证内核版本及arp双发是否实现</p>
+<p>CentOS6.10</p>
+<p>[root@localhost ~]# uname -r<br>d5.7.12</p>
+<p><strong>tcpdump -i eth0 arp</strong></p>
+<p>![image-20200803120352556](/Users/zzh/Library/Application Support/typora-user-images/image-20200803120352556.png)</p>
+<p><strong>tcpdump -i eth1 arp</strong></p>
+<p>![image-20200803120507436](/Users/zzh/Library/Application Support/typora-user-images/image-20200803120507436.png)</p>
+<p>Ubuntu18.04</p>
+<p>root@ubuntu:~# uname -r<br>5.7.12</p>
+<p><img src="/Users/zzh/Desktop/WechatIMG29.png" srcset="/img/loading.gif" alt="WechatIMG29"></p>
 
             </div>
             <hr>
@@ -306,18 +214,12 @@ Press any key to start...or Press Ctrl+C to cancel</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/05/%E9%92%A2%E7%90%B4%E5%85%A5%E9%97%A8/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">钢琴入门</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/04/05/%E6%88%BF%E5%A5%B4%E4%BB%AC%E4%BD%A0%E5%9C%A8%E6%83%B3peach/">
-                        <span class="hidden-mobile">房奴们你在想peach</span>
+                      <a href="/2020/05/10/%E9%98%BF%E9%87%8C%E7%BD%91%E7%BB%9C%E6%B5%85%E8%B0%88/">
+                        <span class="hidden-mobile">阿里网络浅谈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -496,7 +398,7 @@ Press any key to start...or Press Ctrl+C to cancel</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "薅谷歌云羊毛&nbsp;",
+        "源码编译安装linux内核过程&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
